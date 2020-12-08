@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{% block title %}{% endblock %}</title>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+
+	</head>
+	<body>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container">
+
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="{% url 'home' %}">
+    					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAq1BMVEX////5PWv5nzZa0vn5J1/+1976kVb5MW35nzP6njFN1f/oqWT5okBS0Pn+6dWl5fv4lhj5RnH9xdHX9P36rV/6b435NGZh1Pn+3eT8scD7i6L6dZL/9fj8o7X5P234HFn8rb39vcr7h5/7mKz6XYD9zNb7gJn5U3n+7PD+2eD+9u78vbn8yZn5jEr94Mb5miX82Lb6qFD7w4v6s2ug6P/o+P7A7P32/f/orGsyBS5JAAACQ0lEQVR4nO3b2VLCQBBA0URHWRQhKMMiGnYBd8Xl/7/MlA8+WIaENEUP471f0KcaJnnIBAEREREREZHfdbq9y1bOLnvdjva8G9a/uo6NDfNmrYmjQV976g0ahia37icTNbXnzt2ogO/bONaePGetgsCEONKePVfjwsCEONCePkdHAmAYxntwpk4kwDCcaM+f2VS0wmSJR9qCrGb5n4J/ZnvagqxkvqQbbUFG81gqtHNtw/qmYqFx/DRtCg+aRLjQNqxvC0LHD1OECBHqhxAhQv0QIkSoH0KECPVDiBChfggRItQPIUKE+iFEiFA/hAgR6ocQIUL9ECJEqB9ChAj1Q4hwN8LlWfFu3Rcu704bgu5LrgsfKo8HgsrHrgufGmUJ0H3hWUPk2wPhs2yD7gvFK3Re+FLxXfjqvfACIUKECBEiRIgQIUKECBEiRIgQIUKECBEiRIgQIUKECBEiRIgQIUKECBEiRIjwnwk/zt/rhVuduC+s1yRVnRe+1WqHkpwXvsl8eyBs+y58lwKdF7alQNeFH+IVui48R4gQIUKECBEiRIgQIUKECBEiRIgQIUKECBEiRIgQIUKECBEiRIgQIUKECBEiRPiHcOG9sOO70M59F0Z9z4V2lgL05jtvM00T+vKtfpQKDOpe3LeI01e4hZ+pA0IzSgdu4dKMvtBO1gGDYCUkqgtNaz1Q/FdUFlpzlQVMHoptyRXERFiWVlRoTTxLe137Zay3C1f9PDiVdlyKinQzG6a9yhAREREREREREe2iL/0H8VcHu7CkAAAAAElFTkSuQmCC" width="30" height="30" class="d-inline-block align-top" alt="">
+  					</a>
+					<a class="navbar-brand" href="{% url 'home' %}">Your choice</a>
+				</div>
+
+
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="{% url 'home' %}">Home</a></li>
+						{% if user.is_authenticated %}
+						<li><a href="{% url 'create' %}">Create</a></li>
+						{% endif %}
+					</ul>
+
+			<div class="navbar-right">
+			{% if user.is_authenticated %}
+			<p>Hi {{ user.username }}!</p>
+				<p><a href="{% url 'logout' %}">Log out</a></p>
+		  	{% else %}
+				<p>You are not logged in.</p>
+				<a href="{% url 'login' %}">Log In</a>
+					<b> OR </b>
+				<a href="{% url 'signup' %}" class="btn btn-danger btn-xs">SignUp</a> &nbsp;
+		  	{% endif %}
+			</div>
+			</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			{% block main %}{% endblock %}
+		</div>
+
+
+	</body>
+</html>
